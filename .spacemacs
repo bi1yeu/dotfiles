@@ -256,9 +256,7 @@ in `dotspacemacs/user-config'."
         web-mode-css-indent-offset 2
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
-        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
-   )
-  )
+        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -269,7 +267,7 @@ layers configuration. You are free to put any user code."
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (evil-leader/set-key "/" 'spacemacs/helm-project-do-pt)
   (evil-leader/set-key "*" 'spacemacs/helm-project-do-pt-region-or-symbol)
-  )
+  (setq powerline-default-separator 'arrow))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
