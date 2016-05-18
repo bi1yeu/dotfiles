@@ -118,6 +118,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
+   ;; check out http://s9w.io/font_compare/
    dotspacemacs-default-font '("Source Code Pro"
                                :size 14
                                :weight ultra-light
@@ -268,7 +269,8 @@ layers configuration. You are free to put any user code."
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (evil-leader/set-key "/" 'spacemacs/helm-project-do-pt)
   (evil-leader/set-key "*" 'spacemacs/helm-project-do-pt-region-or-symbol)
-  (setq powerline-default-separator 'arrow))
+  (setq powerline-default-separator 'arrow)
+  (spaceline-compile))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
