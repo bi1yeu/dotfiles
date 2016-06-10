@@ -270,7 +270,13 @@ layers configuration. You are free to put any user code."
   (evil-leader/set-key "/" 'spacemacs/helm-project-do-pt)
   (evil-leader/set-key "*" 'spacemacs/helm-project-do-pt-region-or-symbol)
   (setq powerline-default-separator 'arrow)
-  (spaceline-compile))
+  (spaceline-compile)
+  (add-hook 'php-mode-hook 'my-php-mode-hook)
+  (defun my-php-mode-hook ()
+    "My PHP mode configuration."
+    (setq indent-tabs-mode t
+          tab-width 4
+          c-basic-offset 4)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
