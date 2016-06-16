@@ -35,6 +35,10 @@ values."
      markdown
      org
      osx
+     ;; for pandoc
+     ;; $ brew install pandoc
+     ;; $ brew cask install mactex
+     pandoc
      php
      ranger
      search-engine
