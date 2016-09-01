@@ -263,12 +263,19 @@ in `dotspacemacs/user-config'."
         org-agenda-files (quote ("~/org/notes.org"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))))
 
+(defun custom-clear-repl-buffer ()
+  (interactive)
+  (cider-switch-to-repl-buffer)
+  (cider-repl-clear-buffer)
+  (cider-switch-to-last-clojure-buffer))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (dolist (m '(clojure-mode clojurec-mode clojurescript-mode clojurex-mode))
-    (spacemacs/set-leader-keys-for-major-mode m "fr" 'cider-format-region))
+    (spacemacs/set-leader-keys-for-major-mode m "fr" 'cider-format-region)
+    (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer))
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (evil-leader/set-key "/" 'spacemacs/helm-project-do-pt)
   (evil-leader/set-key "*" 'spacemacs/helm-project-do-pt-region-or-symbol)
