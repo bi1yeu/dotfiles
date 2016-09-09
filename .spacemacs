@@ -275,7 +275,8 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (dolist (m '(clojure-mode clojurec-mode clojurescript-mode clojurex-mode))
     (spacemacs/set-leader-keys-for-major-mode m "fr" 'cider-format-region)
-    (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer))
+    (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer)
+    (spacemacs/set-leader-keys-for-major-mode m "dl" 'cider-inspect-last-result))
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (evil-leader/set-key "/" 'spacemacs/helm-project-do-pt)
   (evil-leader/set-key "*" 'spacemacs/helm-project-do-pt-region-or-symbol)
