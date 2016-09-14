@@ -269,6 +269,12 @@ in `dotspacemacs/user-config'."
   (cider-repl-clear-buffer)
   (cider-switch-to-last-clojure-buffer))
 
+(defun my-php-mode-hook ()
+  "My PHP mode configuration."
+  (setq indent-tabs-mode t
+        tab-width 4
+        c-basic-offset 4))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -283,11 +289,7 @@ layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'arrow)
   (spaceline-compile)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
-  (defun my-php-mode-hook ()
-    "My PHP mode configuration."
-    (setq indent-tabs-mode t
-          tab-width 4
-          c-basic-offset 4)))
+  (spacemacs/add-to-hooks 'flyspell-mode '(text-mode-hook org-mode-hook markdown-mode-hook)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
