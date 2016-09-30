@@ -289,7 +289,9 @@ layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'arrow)
   (spaceline-compile)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
-  (spacemacs/add-to-hooks 'flyspell-mode '(text-mode-hook org-mode-hook markdown-mode-hook)))
+  (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
+    (spacemacs/add-to-hooks 'auto-fill-mode text-mode-hooks)
+    (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
