@@ -42,7 +42,7 @@ values."
      php
      ranger
      search-engine
-     (shell :variables shell-default-shell 'eshell)
+     (shell :variables shell-default-shell 'shell)
      (spell-checking :variables spell-checking-enable-by-default nil)
      syntax-checking
      )
