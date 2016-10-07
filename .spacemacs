@@ -30,6 +30,7 @@ values."
      emacs-lisp
      git
      github
+     helm
      html
      javascript
      markdown
