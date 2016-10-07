@@ -262,7 +262,8 @@ in `dotspacemacs/user-config'."
         web-mode-css-indent-offset 2
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
-        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))))
+        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
+        tramp-default-method "ssh"))
 
 (defun custom-clear-repl-buffer ()
   (interactive)
