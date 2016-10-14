@@ -28,6 +28,7 @@ values."
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
      emacs-lisp
+     emoji
      git
      github
      helm
@@ -263,7 +264,8 @@ in `dotspacemacs/user-config'."
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
-        tramp-default-method "ssh"))
+        tramp-default-method "ssh"
+        ns-use-srgb-colorspace nil))
 
 (defun custom-clear-repl-buffer ()
   (interactive)
