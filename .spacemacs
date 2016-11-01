@@ -107,7 +107,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(ujelly
+   dotspacemacs-themes '(wombat
+                         ujelly
                          zen-and-art
                          alect-dark
                          tao-yin
@@ -264,7 +265,7 @@ in `dotspacemacs/user-config'."
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
-        tramp-default-method "ssh"
+        tramp-default-method "sshx"
         ns-use-srgb-colorspace nil))
 
 (defun custom-clear-repl-buffer ()
