@@ -1,16 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-read -p "This will overwrite any existing ~/.spacemacs file. Continue? [Y/n] " answer
-SCRIPT_PATH="${BASH_SOURCE[0]}";
-while true
-do
-  case $answer in
-   [Y]* ) ln -f `dirname ${SCRIPT_PATH}`/.spacemacs ~/.spacemacs
-          echo "`dirname ${SCRIPT_PATH}`/.spacemacs has been hard-linked to ~/.spacemacs"
-          break;;
+read -rp "# This will overwrite any existing ~/.spacemacs file. Continue? [y/N] " confirm
+script_path="${BASH_SOURCE[0]}"
 
-   * ) echo "did nothing"
-       exit;;
-  esac
-done
-
+if [[ $confirm == y ]]
+then
+    ln -f $(dirname $script_path)/.spacemacs ~/.spacemacs
+    echo "# $(dirname $script_path)/.spacemacs has been hard-linked to ~/.spacemacs"
+else
+    echo "# Did nothing."
+fi
