@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-read -rp "# This will overwrite any existing ~/.spacemacs file. Continue? [y/N] " confirm
-script_path="${BASH_SOURCE[0]}"
+read -rp "# Are you sure you want to symlink this repo's spacemacs directory to ~/.spacemacs.d? [y/N] " confirm
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd -P`
+popd > /dev/null
 
 if [[ $confirm == y ]]
 then
-    ln -f $(dirname $script_path)/.spacemacs ~/.spacemacs
-    echo "# $(dirname $script_path)/.spacemacs has been hard-linked to ~/.spacemacs"
+    ln -v -s $SCRIPTPATH/spacemacs ~/.spacemacs.d || { echo "# Couldn't link ~/.spacemacs.d"; exit 1; }
 else
     echo "# Did nothing."
 fi
