@@ -344,6 +344,7 @@ you should place your code here."
         js2-basic-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
+        css-indent-offset 2
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
