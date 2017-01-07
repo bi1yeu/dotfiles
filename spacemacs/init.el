@@ -338,7 +338,7 @@ you should place your code here."
   (spaceline-compile)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
-    (spacemacs/add-to-hooks 'auto-fill-mode text-mode-hooks)
+    (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
   (setq projectile-enable-caching t
         js-indent-level 2
