@@ -344,9 +344,11 @@ you should place your code here."
         org-agenda-files (quote ("~/org/notes.org"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
         tramp-default-method "sshx"
-        ns-use-srgb-colorspace nil)
-  (when (window-system)
-    (set-default-font "Fira Code"))
+        ns-use-srgb-colorspace nil
+        org-capture-templates '(("t" "Todo" entry (file+headline "~/Documents/tasks.org" "Tasks")
+                                 "* TODO %?\n  %i\n  %a")
+                                ("j" "Journal" entry (file+datetree "~/Documents/journal.org")
+                                 "* %?\nEntered on %U\n  %i\n  %a")))
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                  (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
                  (36 . ".\\(?:>\\)")
