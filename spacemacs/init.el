@@ -59,7 +59,7 @@ values."
      (shell :variables shell-default-shell 'shell)
      (spell-checking :variables spell-checking-enable-by-default nil)
      syntax-checking
-     )
+     themes-megapack)
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -136,22 +136,16 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(gotham
-                         jazz
-                         wilson
-                         planet
-                         sanityinc-tomorrow-eighties
-                         soft-morning
-                         tao-yin
-                         tronesque
-                         twilight-bright)
+   dotspacemacs-themes '(soothe
+                         zonokai-red
+                         birds-of-paradise-plus)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Fira Code Retina"
-                               :size 15
-                               :weight normal
+   dotspacemacs-default-font '("Fira Code Light"
+                               :size 12
+                               :weight light
                                :width normal
                                :powerline-scale 1.5)
    ;; The leader key
@@ -375,9 +369,7 @@ you should place your code here."
                  (119 . ".\\(?:ww\\)")
                  (123 . ".\\(?:-\\)")
                  (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-                 (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-                 )
-               ))
+                 (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)"))))
     (dolist (char-regexp alist)
       (set-char-table-range composition-function-table (car char-regexp)
                             `([,(cdr char-regexp) 0 font-shape-gstring])))))
