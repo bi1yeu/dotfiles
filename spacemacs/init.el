@@ -136,7 +136,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(soothe
+   dotspacemacs-themes '(majapahit-light
+                         soothe
                          zonokai-red
                          birds-of-paradise-plus)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -144,7 +145,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Fira Code Light"
-                               :size 12
+                               :size 14
                                :weight light
                                :width normal
                                :powerline-scale 1.5)
@@ -342,11 +343,11 @@ you should place your code here."
         css-indent-offset 2
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
-        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "DONE" ))
+        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE" "ABANDONED" ))
         tramp-default-method "sshx"
         ns-use-srgb-colorspace nil
         org-capture-templates '(("t" "Todo" entry (file+headline "~/Documents/tasks.org" "Tasks")
-                                 "* TODO %?\n  %i\n  %a")
+                                 "* TODO %?\nEntered on %U\n  %i\n  %a")
                                 ("j" "Journal" entry (file+datetree "~/Documents/journal.org")
                                  "* %?\nEntered on %U\n  %i\n  %a")))
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
