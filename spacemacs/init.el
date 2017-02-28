@@ -341,6 +341,7 @@ you should place your code here."
         web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         css-indent-offset 2
+        tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-agenda-files (quote ("~/org/notes.org"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE" "ABANDONED" ))
