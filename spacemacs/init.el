@@ -316,6 +316,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
         tab-width 4
         c-basic-offset 4))
 
+(defconst tasks-file "~/Documents/tasks.org")
+(defconst journal-file "~/Documents/journal.org")
+
+(defun open-tasks-file ()
+  (interactive)
+  (find-file tasks-file))
+
+(defun open-journal-file ()
+  (interactive)
+  (find-file journal-file))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -329,13 +340,15 @@ you should place your code here."
     (spacemacs/set-leader-keys-for-major-mode m "dl" 'cider-inspect-last-result))
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (spacemacs/set-leader-keys "qc" 'delete-frame)
-  (setq powerline-default-separator 'arrow)
-  (spaceline-compile)
+  (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
+  (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
+  (spaceline-compile)
   (setq projectile-enable-caching t
+        powerline-default-separator 'arrow
         js-indent-level 2
         js2-basic-offset 2
         web-mode-markup-indent-offset 2
@@ -347,9 +360,9 @@ you should place your code here."
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE" "ABANDONED" ))
         tramp-default-method "sshx"
         ns-use-srgb-colorspace nil
-        org-capture-templates '(("t" "Todo" entry (file+headline "~/Documents/tasks.org" "Tasks")
+        org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
-                                ("j" "Journal" entry (file+datetree "~/Documents/journal.org")
+                                ("j" "Journal" entry (file+datetree journal-file)
                                  "* %?\nEntered on %U\n  %i\n  %a")))
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                  (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
