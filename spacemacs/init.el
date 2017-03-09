@@ -136,7 +136,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(majapahit-light
+   dotspacemacs-themes '(majapahit-dark
                          soothe
                          zonokai-red
                          birds-of-paradise-plus)
@@ -347,23 +347,23 @@ you should place your code here."
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
   (spaceline-compile)
-  (setq projectile-enable-caching t
-        powerline-default-separator 'arrow
+  (setq css-indent-offset 2
         js-indent-level 2
         js2-basic-offset 2
-        web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        css-indent-offset 2
-        tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
-        org-bullets-bullet-list '("■" "◆" "▲" "▶")
-        org-agenda-files (quote ("~/org/notes.org"))
-        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE" "ABANDONED" ))
-        tramp-default-method "sshx"
         ns-use-srgb-colorspace nil
+        org-agenda-files (quote ("~/org/notes.org"))
+        org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
                                 ("j" "Journal" entry (file+datetree journal-file)
-                                 "* %?\nEntered on %U\n  %i\n  %a")))
+                                 "* %?\nEntered on %U\n  %i\n  %a"))
+        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" ))
+        powerline-default-separator 'arrow
+        tramp-default-method "sshx"
+        tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
+        web-mode-css-indent-offset 2
+        web-mode-markup-indent-offset 2
+        projectile-enable-caching t)
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                  (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
                  (36 . ".\\(?:>\\)")
@@ -393,3 +393,32 @@ you should place your code here."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(Linum-format "%7i ")
+ '(ansi-term-color-vector
+   [unspecified "#1F1611" "#660000" "#144212" "#EFC232" "#5798AE" "#BE73FD" "#93C1BC" "#E6E1DC"] t)
+ '(cursor-type (quote bar))
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-character-color "#452E2E")
+ '(fci-rule-color "#452E2E")
+ '(fringe-mode 4 nil (fringe))
+ '(main-line-color1 "#1E1E1E")
+ '(main-line-color2 "#111111")
+ '(main-line-separator-style (quote chamfer))
+ '(org-agenda-files nil)
+ '(package-selected-packages
+   (quote
+    (ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic zenburn-theme which-key web-mode use-package ujelly-theme toc-org tao-theme tango-plus-theme spacemacs-theme shell-pop restart-emacs ranger pug-mode phpunit persp-mode osx-dictionary orgit org org-plus-contrib org-download neotree move-text mmm-mode markdown-toc inkpot-theme info+ indent-guide hide-comnt help-fns+ helm-projectile helm-make helm-gitignore request helm-c-yasnippet helm-ag gotham-theme gitattributes-mode git-timemachine git-link expand-region exec-path-from-shell evil-surround evil-nerd-commenter evil-mc evil-matchit evil-escape evil-ediff evil-anzu eshell-z drupal-mode dracula-theme darktooth-theme company-statistics clj-refactor cider clojure-mode auto-compile packed apropospriate-theme ace-window auto-complete smartparens highlight evil flycheck flyspell-correct company helm helm-core multiple-cursors avy skewer-mode js2-mode simple-httpd magit magit-popup git-commit with-editor async alert projectile yasnippet php-mode haml-mode dash zonokai-theme zen-and-art-theme xterm-color ws-butler window-numbering web-beautify volatile-highlights vi-tilde-fringe uuidgen undo-tree underwater-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tangotango-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spaceline spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode seti-theme scss-mode sass-mode reverse-theme reveal-in-osx-finder rainbow-mode rainbow-identifiers rainbow-delimiters railscasts-theme queue quelpa purple-haze-theme professional-theme popwin planet-theme pkg-info phpcbf php-extras php-auto-yasnippets phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el pbcopy pastels-on-dark-theme paredit paradox pandoc-mode ox-pandoc osx-trash organic-green-theme org-projectile org-present org-pomodoro org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mwim mustang-theme multi-term monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme markdown-mode majapahit-theme magit-gitflow magit-gh-pulls macrostep lush-theme lorem-ipsum log4e livid-mode linum-relative link-hint light-soap-theme less-css-mode launchctl json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inflections ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-themes helm-swoop helm-mode-manager helm-flx helm-descbinds helm-css-scss helm-company hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme goto-chg google-translate golden-ratio gnuplot gntp gitignore-mode github-search github-clone github-browse-file gitconfig-mode git-messenger gist gh-md gandalf-theme flyspell-correct-helm flycheck-pos-tip flx-ido flatui-theme flatland-theme firebelly-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-search-highlight-persist evil-numbers evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-args espresso-theme eshell-prompt-extras esh-help engine-mode emoji-cheat-sheet-plus emmet-mode elisp-slime-nav edn dumb-jump django-theme diminish darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-web company-tern company-emoji column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode coffee-mode clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme bind-key badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary anzu anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ace-link ace-jump-helm-line ac-ispell)))
+ '(pos-tip-foreground-color "#FFFFC8")
+ '(powerline-color1 "#1E1E1E")
+ '(powerline-color2 "#111111"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
