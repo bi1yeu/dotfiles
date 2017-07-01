@@ -72,8 +72,7 @@ values."
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
    ;; unused packages as well as their unused dependencies.
-   ;; `used-but-keep-unused' installs only the used packages but won't uninstall
-   ;; them if they become unused. `all' installs *all* packages supported by
+   ;; `used-but-keep-unused' installs only the used packages but won't uninstall ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
    dotspacemacs-install-packages 'used-only))
 
@@ -348,11 +347,8 @@ you should place your code here."
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
   (spaceline-compile)
-  (setq css-indent-offset 2
-        js-indent-level 2
-        js2-basic-offset 2
-        ns-use-srgb-colorspace nil
-        org-agenda-files (quote ("~/org/notes.org"))
+  (setq ns-use-srgb-colorspace nil
+        org-agenda-files '(tasks-file)
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
@@ -362,8 +358,13 @@ you should place your code here."
         powerline-default-separator 'arrow
         tramp-default-method "sshx"
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
-        web-mode-css-indent-offset 2
+        js-indent-level 2
+        js2-basic-offset 2
+        css-indent-offset 2
         web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-attr-indent-offset 2
         projectile-enable-caching t)
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                  (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
