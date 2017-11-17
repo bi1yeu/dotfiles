@@ -57,8 +57,11 @@ values."
      search-engine
      (shell :variables shell-default-shell 'shell)
      (spell-checking :variables spell-checking-enable-by-default nil)
+     sql
      syntax-checking
-     themes-megapack)
+     themes-megapack
+     yaml
+     )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -67,7 +70,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(anaconda-mode)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -135,12 +138,17 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(birds-of-paradise-plus
-                         badwolf
-                         brin
+   dotspacemacs-themes '(
+                         planet
                          majapahit-dark
+                         solarized-light
+                         brin
+                         gruvbox
+                         birds-of-paradise-plus
+                         badwolf
                          soothe
-                         zonokai-red)
+                         zonokai-red
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -348,10 +356,12 @@ you should place your code here."
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
   (spaceline-compile)
+  (defalias 'forward-evil-word 'forward-evil-symbol)
   (setq css-indent-offset 2
         js-indent-level 2
         js2-basic-offset 2
         ns-use-srgb-colorspace nil
+        ispell-program-name "/usr/local/bin/aspell"
         org-agenda-files (quote ("~/org/notes.org"))
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
