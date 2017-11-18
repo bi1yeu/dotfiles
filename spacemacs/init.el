@@ -37,6 +37,7 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      better-defaults
+     c-c++
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
      emacs-lisp
@@ -351,6 +352,9 @@ you should place your code here."
   (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
   (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
+  (add-hook 'c++-mode-hook 'clang-format-bindings)
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
