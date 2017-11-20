@@ -377,6 +377,7 @@ you should place your code here."
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
         js-indent-level 2
         js2-basic-offset 2
+        js2-strict-missing-semi-warning nil
         css-indent-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
