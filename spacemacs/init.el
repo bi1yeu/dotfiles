@@ -331,7 +331,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         c-basic-offset 4))
 
 (defconst tasks-file "~/Documents/tasks.org")
-(defconst journal-file "~/Documents/journal.org")
+(defconst journal-file "~/Dropbox/Documents/selective-sync/journal.org")
 
 (defun open-tasks-file ()
   (interactive)
