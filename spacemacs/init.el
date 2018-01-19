@@ -41,7 +41,6 @@ values."
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
      emacs-lisp
-     emoji
      git
      github
      helm
@@ -340,6 +339,25 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (defun open-journal-file ()
   (interactive)
   (find-file journal-file))
+
+;; via http://wenshanren.org/?p=334
+(defun org-insert-src-block (src-code-type)
+  "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
+  (interactive
+   (let ((src-code-types
+          '("emacs-lisp" "python" "C" "sh" "java" "js" "json" "clojure" "coffee"
+            "C++" "css" "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond"
+            "mscgen" "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk"
+            "ditaa" "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
+            "scheme" "sqlite")))
+     (list (ido-completing-read "Source code type: " src-code-types))))
+  (progn
+    (newline-and-indent)
+    (insert (format "#+BEGIN_SRC %s\n" src-code-type))
+    (newline-and-indent)
+    (insert "#+END_SRC\n")
+    (previous-line 2)
+    (org-edit-src-code)))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
