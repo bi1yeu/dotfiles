@@ -72,11 +72,6 @@ values."
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(anaconda-mode
-                                    firebelly-theme
-                                    niflheim-theme
-                                    pastels-on-dark-theme
-                                    tronesque-theme
-                                    zonokai-theme
                                     org-projectile)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
