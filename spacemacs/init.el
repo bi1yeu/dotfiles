@@ -45,6 +45,7 @@ values."
      github
      helm
      html
+     ipython-notebook
      javascript
      markdown
      org
