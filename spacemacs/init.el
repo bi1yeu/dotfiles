@@ -355,6 +355,32 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (previous-line 2)
     (org-edit-src-code)))
 
+;; This function will prompt for a blog post title, and then create an empty
+;; Jekyll post at the `posts-dir` directory.
+(defun new-blog-post ()
+  (interactive)
+  (let ((post-title (read-string "Enter new post title: ")))
+    (let* ((posts-dir "/ssh:vps:~/projects/blog/_posts/")
+           (clean-title (replace-regexp-in-string
+                         "[^[:alpha:][:digit:]_-]"
+                         ""
+                         (s-replace " " "-" (downcase post-title))))
+           (new-post-filename (concat
+                               (format-time-string "%Y-%m-%d")
+                               "-"
+                               clean-title
+                               ".md"))
+           (frontmatter (s-replace "{date}"
+                                   (format-time-string "%Y-%m-%d %H:%m %z")
+                                   (s-replace "{title}"
+                                              post-title
+                                              frontmatter-template)))
+           (new-post-file (expand-file-name new-post-filename posts-dir)))
+      (if (file-exists-p new-post-file)
+          (message "A post with that name already exists.")
+        (write-region frontmatter nil new-post-file)
+        (find-file new-post-file)))))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -370,6 +396,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "qc" 'delete-frame)
   (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
   (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
+  (spacemacs/set-leader-keys "abp" 'new-blog-post)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
   (add-hook 'c++-mode-hook 'clang-format-bindings)
   (defun clang-format-bindings ()
