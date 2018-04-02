@@ -370,6 +370,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                "-"
                                clean-title
                                ".md"))
+           (frontmatter-template "---\nlayout: post\ntitle: {title}\ndate: {date}\n---\n\n")
            (frontmatter (s-replace "{date}"
                                    (format-time-string "%Y-%m-%d %H:%m %z")
                                    (s-replace "{title}"
