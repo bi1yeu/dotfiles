@@ -393,6 +393,7 @@ you should place your code here."
     (spacemacs/set-leader-keys-for-major-mode m "fr" 'cider-format-region)
     (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer)
     (spacemacs/set-leader-keys-for-major-mode m "dl" 'cider-pprint-eval-last-sexp))
+  (spacemacs/set-leader-keys "/" 'helm-ag-project-root)
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (spacemacs/set-leader-keys "qc" 'delete-frame)
   (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
