@@ -139,6 +139,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         majapahit-light
                          white-sand
                          planet
                          majapahit-dark
@@ -155,7 +156,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Fira Code Light"
-                               :size 17
+                               :size 14
                                :weight light
                                :width normal
                                :powerline-scale 1.5)
@@ -394,6 +395,7 @@ you should place your code here."
     (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer)
     (spacemacs/set-leader-keys-for-major-mode m "dl" 'cider-pprint-eval-last-sexp))
   (spacemacs/set-leader-keys "/" 'helm-ag-project-root)
+  (spacemacs/set-leader-keys "xwC" 'flyspell-auto-correct-word)
   (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (spacemacs/set-leader-keys "qc" 'delete-frame)
   (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
