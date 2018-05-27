@@ -326,7 +326,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         tab-width 4
         c-basic-offset 4))
 
-(defconst tasks-file "~/Documents/tasks.org")
+(defconst tasks-file "~/Dropbox/Documents/selective-sync/tasks.org")
 (defconst journal-file "~/Dropbox/Documents/selective-sync/journal.org")
 
 (defun open-tasks-file ()
