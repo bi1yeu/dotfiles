@@ -304,6 +304,10 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'changed
+   ;; allow the cursor to go beyond the last character in a line in evil mode
+   ;; e.g. `(some sexp)[]' <-- where `[]' is the cursor.
+   ;; see https://github.com/syl20bnr/spacemacs/issues/646
+   evil-move-beyond-eol 't
    ))
 
 (defun dotspacemacs/user-init ()
