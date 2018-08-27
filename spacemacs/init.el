@@ -422,13 +422,13 @@ you should place your code here."
         js2-basic-offset 2
         ns-use-srgb-colorspace nil
         ispell-program-name "/usr/local/bin/aspell"
-        org-agenda-files (quote ("~/org/notes.org"))
+        org-agenda-files (list tasks-file)
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
                                 ("j" "Journal" entry (file+datetree journal-file)
                                  "* %?\nEntered on %U\n  %i\n  %a"))
-        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" ))
+        org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
         powerline-default-separator 'arrow
         tramp-default-method "sshx"
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
