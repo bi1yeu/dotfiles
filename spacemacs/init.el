@@ -426,7 +426,7 @@ you should place your code here."
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
-                                ("j" "Journal" entry (file+datetree journal-file)
+                                ("j" "Journal" entry (file+olp+datetree journal-file)
                                  "* %?\nEntered on %U\n  %i\n  %a"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
         powerline-default-separator 'arrow
