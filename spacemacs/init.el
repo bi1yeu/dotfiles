@@ -138,19 +138,21 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(
-                         brin
-                         majapahit-dark
-                         majapahit-light
-                         white-sand
-                         planet
-                         solarized-light
-                         gruvbox
-                         birds-of-paradise-plus
-                         badwolf
-                         soothe
-                         zonokai-red
-                         )
+   dotspacemacs-themes (if (display-graphic-p)
+                           '(
+                             brin
+                             majapahit-dark
+                             majapahit-light
+                             white-sand
+                             planet
+                             solarized-light
+                             gruvbox
+                             birds-of-paradise-plus
+                             badwolf
+                             soothe
+                             zonokai-red
+                             )
+                         '(professional))
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -429,7 +431,7 @@ you should place your code here."
                                 ("j" "Journal" entry (file+olp+datetree journal-file)
                                  "* %?\nEntered on %U\n  %i\n  %a"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
-        powerline-default-separator 'arrow
+        powerline-default-separator (if (display-graphic-p) 'arrow 'utf-8)
         tramp-default-method "sshx"
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
         js-indent-level 2
