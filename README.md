@@ -1,5 +1,5 @@
 # dotfiles
 
 ```bash
-./link-dotfiles.sh
+./link-dotfiles.bash
 ```
