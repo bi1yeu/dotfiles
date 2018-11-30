@@ -437,7 +437,7 @@ you should place your code here."
                                  "* %?\nEntered on %U\n  %i\n  %a"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
         powerline-default-separator (if (display-graphic-p) 'arrow 'utf-8)
-        tramp-terminal-type "tramp"
+        tramp-terminal-type "dumb"
         tramp-default-method "sshx"
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
         js-indent-level 2
