@@ -446,6 +446,7 @@ you should place your code here."
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-attr-indent-offset 2
+        nrepl-use-ssh-fallback-for-remote-hosts t
         projectile-enable-caching t)
   (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                  (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
