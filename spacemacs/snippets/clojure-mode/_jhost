@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : _jhost
+#key : _jhost
+#contributor : Matthew Bilyeu
+# --
+(.getHostName (java.net.InetAddress/getLocalHost))
