@@ -418,6 +418,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
   (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
   (spacemacs/set-leader-keys "abp" 'new-blog-post)
+  (spacemacs/set-leader-keys "bS" 'save-some-buffers)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
   (add-hook 'c++-mode-hook 'clang-format-bindings)
   (defun clang-format-bindings ()
