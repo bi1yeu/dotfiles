@@ -390,6 +390,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (write-region frontmatter nil new-post-file)
         (find-file new-post-file)))))
 
+;; https://stackoverflow.com/a/7015844
+(defun org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file))
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
