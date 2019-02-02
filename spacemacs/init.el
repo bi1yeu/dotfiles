@@ -421,6 +421,8 @@ you should place your code here."
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
   (add-hook 'c++-mode-hook 'clang-format-bindings)
+  (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook react-mode-hook js2-mode-hook)))
+    (spacemacs/add-to-hooks 'fci-mode fci-mode-hooks))
   (defun clang-format-bindings ()
     (define-key c++-mode-map [tab] 'clang-format-buffer))
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
