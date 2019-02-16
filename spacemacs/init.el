@@ -436,6 +436,7 @@ you should place your code here."
         ns-use-srgb-colorspace nil
         ispell-program-name "/usr/local/bin/aspell"
         org-agenda-files (list tasks-file)
+        org-pretty-entities t
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
