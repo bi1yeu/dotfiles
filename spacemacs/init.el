@@ -365,6 +365,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (previous-line 2)
     (org-edit-src-code)))
 
+(defun org-insert-quote-block ()
+  (interactive
+   (progn
+     (newline-and-indent)
+     (insert "#+BEGIN_QUOTE\n")
+     (newline-and-indent)
+     (insert "#+END_QUOTE\n")
+     (previous-line 2))))
+
 ;; This function will prompt for a blog post title, and then create an empty
 ;; Jekyll post at the `posts-dir` directory.
 (defun new-blog-post ()
