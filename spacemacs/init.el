@@ -41,6 +41,7 @@ values."
      c-c++
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
+     csv
      emacs-lisp
      git
      github
