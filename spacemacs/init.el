@@ -375,6 +375,20 @@ before packages are loaded. If you are unsure, you should try in setting them in
      (insert "#+END_QUOTE\n")
      (previous-line 2))))
 
+(defun header-comment (comment)
+  "Insert a header COMMENT
+A header comment is a line of comment characters fill-column
+long, a line of 3 comment characters followed by a space then
+COMMENT, and a line of comment characters fill-column long
+again."
+  (interactive "sComment: ")
+  (let* ((comment-char (string-to-char comment-start))
+         (wrapper (make-string fill-column comment-char))
+         (comment-line (format "%s %s"
+                               (make-string 3 comment-char)
+                               comment)))
+    (insert wrapper "\n" comment-line "\n" wrapper)))
+
 ;; This function will prompt for a blog post title, and then create an empty
 ;; Jekyll post at the `posts-dir` directory.
 (defun new-blog-post ()
@@ -433,6 +447,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
   (spacemacs/set-leader-keys "abp" 'new-blog-post)
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
+  (spacemacs/set-leader-keys "ic" 'header-comment)
   (add-hook 'php-mode-hook 'my-php-mode-hook)
   (add-hook 'c++-mode-hook 'clang-format-bindings)
   (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook react-mode-hook js2-mode-hook)))
