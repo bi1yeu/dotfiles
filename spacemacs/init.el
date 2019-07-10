@@ -339,6 +339,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 (defconst tasks-file "~/Dropbox/Documents/selective-sync/tasks.org")
 (defconst journal-file "~/Dropbox/Documents/selective-sync/journal.org")
+(defconst work-file "~/Dropbox/Documents/selective-sync/work.org")
 
 (defun open-tasks-file ()
   (interactive)
@@ -347,6 +348,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (defun open-journal-file ()
   (interactive)
   (find-file journal-file))
+
+(defun open-work-file ()
+  (interactive)
+  (find-file work-file))
 
 ;; via http://wenshanren.org/?p=334
 (defun org-insert-src-block (src-code-type)
@@ -448,6 +453,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "qc" 'delete-frame)
   (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
   (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
+  (spacemacs/set-leader-keys "aoW" 'open-work-file)
   (spacemacs/set-leader-keys "abp" 'new-blog-post)
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
   (spacemacs/set-leader-keys "ic" 'header-comment)
@@ -470,12 +476,16 @@ you should place your code here."
         org-agenda-files (list tasks-file)
         org-pretty-entities t
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
-        org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Tasks")
+        org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Personal")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
                                 ("s" "School" entry (file+headline tasks-file "School")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
                                 ("j" "Journal" entry (file+olp+datetree journal-file)
-                                 "* %?\nEntered on %U\n  %i\n  %a"))
+                                 "* %?\nEntered on %U\n  %i\n  %a")
+                                ("w" "Work" entry (file+olp+datetree work-file "Notes")
+                                 "* %?\nEntered on %U\n  %i\n  %a")
+                                ("W" "Work tasks" entry (file+headline work-file "Tasks")
+                                 "* TODO %?\nEntered on %U\n  %i\n  %a"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
         powerline-default-separator (if (display-graphic-p) 'arrow 'utf-8)
         tramp-terminal-type "dumb"
