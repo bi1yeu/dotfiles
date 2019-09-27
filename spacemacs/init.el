@@ -38,7 +38,6 @@ values."
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
-     c-c++
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
      csv
@@ -56,8 +55,10 @@ values."
      ranger
      react
      ruby
+     ruby-on-rails
      search-engine
      (shell :variables shell-default-shell 'shell)
+     shell-scripts
      (spell-checking :variables spell-checking-enable-by-default nil)
      sql
      syntax-checking
@@ -78,7 +79,8 @@ values."
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
    ;; unused packages as well as their unused dependencies.
-   ;; `used-but-keep-unused' installs only the used packages but won't uninstall ;; them if they become unused. `all' installs *all* packages supported by
+   ;; `used-but-keep-unused' installs only the used packages but won't uninstall
+   ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
    dotspacemacs-install-packages 'used-only))
 
@@ -97,14 +99,14 @@ values."
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
    ;; (default t)
-   dotspacemacs-elpa-https t
+   dotspacemacs-elpa-https nil
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
    ;; to `emacs-version'.
@@ -140,24 +142,20 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes (if (display-graphic-p)
-                           '(
-                             brin
-                             majapahit-dark
-                             majapahit-light
-                             white-sand
-                             planet
-                             solarized-light
-                             gruvbox
-                             birds-of-paradise-plus
-                             badwolf
-                             soothe
-                             zonokai-red
-                             )
-                         '(
-                           solarized-light
-                           dracula
-                           zenburn))
+   dotspacemacs-themes '(
+                         darktooth
+                         sanityinc-tomorrow-blue
+                         solarized-light
+                         birds-of-paradise-plus
+                         zen-and-art
+                         majapahit-light
+                         whiteboard
+                         zenburn
+                         sanityinc-tomorrow-eighties
+                         sanityinc-solarized-light
+                         majapahit-dark
+                         dracula
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -257,7 +255,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -276,8 +274,18 @@ values."
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
-   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
-   ;; derivatives. If set to `relative', also turns on relative line numbers.
+   ;; Control line numbers activation.
+   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
+   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; This variable can also be set to a property list for finer control:
+   ;; '(:relative nil
+   ;;   :disabled-for-modes dired-mode
+   ;;                       doc-view-mode
+   ;;                       markdown-mode
+   ;;                       org-mode
+   ;;                       pdf-view-mode
+   ;;                       text-mode
+   ;;   :size-limit-kb 1000)
    ;; (default nil)
    dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
@@ -289,7 +297,7 @@ values."
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis t
+   dotspacemacs-smart-closing-parenthesis nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -323,7 +331,8 @@ It is called immediately after `dotspacemacs/init', before layer configuration
 executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
-`dotspacemacs/user-config' first.")
+`dotspacemacs/user-config' first."
+  )
 
 (defun custom-clear-repl-buffer ()
   (interactive)
@@ -331,27 +340,22 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (cider-repl-clear-buffer)
   (cider-switch-to-last-clojure-buffer))
 
-(defun my-php-mode-hook ()
-  "My PHP mode configuration."
-  (setq indent-tabs-mode t
-        tab-width 4
-        c-basic-offset 4))
+(defconst notes-file "~/Documents/notes.org")
+(defconst notes-archive-file (concat notes-file "_archive"))
 
-(defconst tasks-file "~/Dropbox/Documents/selective-sync/tasks.org")
-(defconst journal-file "~/Dropbox/Documents/selective-sync/journal.org")
-(defconst work-file "~/Dropbox/Documents/selective-sync/work.org")
-
-(defun open-tasks-file ()
+;; https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=887332
+;; https://stackoverflow.com/a/30468232
+(defun save-notes-archive-file ()
   (interactive)
-  (find-file tasks-file))
+  (save-some-buffers 'no-confirm (lambda ()
+                                   (cond
+                                    ((and buffer-file-name
+                                          (equal buffer-file-name
+                                                 (expand-file-name notes-archive-file))))))))
 
-(defun open-journal-file ()
+(defun open-notes-file ()
   (interactive)
-  (find-file journal-file))
-
-(defun open-work-file ()
-  (interactive)
-  (find-file work-file))
+  (find-file notes-file))
 
 ;; via http://wenshanren.org/?p=334
 (defun org-insert-src-block (src-code-type)
@@ -368,7 +372,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (newline-and-indent)
     (insert (if (not (string-equal src-code-type ""))
                 (format "#+BEGIN_SRC %s\n" src-code-type)
-                "#+BEGIN_SRC"))
+              "#+BEGIN_SRC"))
     (newline-and-indent)
     (insert "#+END_SRC\n")
     (previous-line 2)
@@ -397,37 +401,26 @@ again."
                                comment)))
     (insert wrapper "\n" comment-line "\n" wrapper)))
 
-;; This function will prompt for a blog post title, and then create an empty
-;; Jekyll post at the `posts-dir` directory.
-(defun new-blog-post ()
+(defun insert-divider-line ()
   (interactive)
-  (let ((post-title (read-string "Enter new post title: ")))
-    (let* ((posts-dir "/ssh:vps:~/projects/blog/_posts/")
-           (clean-title (replace-regexp-in-string
-                         "[^[:alpha:][:digit:]_-]"
-                         ""
-                         (s-replace " " "-" (downcase post-title))))
-           (new-post-filename (concat
-                               (format-time-string "%Y-%m-%d")
-                               "-"
-                               clean-title
-                               ".md"))
-           (frontmatter-template "---\nlayout: post\ntitle: {title}\nauthor: Matt Bilyeu\ndate: {date}\n---\n\n")
-           (frontmatter (s-replace "{date}"
-                                   (format-time-string "%Y-%m-%d %H:%m %z")
-                                   (s-replace "{title}"
-                                              post-title
-                                              frontmatter-template)))
-           (new-post-file (expand-file-name new-post-filename posts-dir)))
-      (if (file-exists-p new-post-file)
-          (message "A post with that name already exists.")
-        (write-region frontmatter nil new-post-file)
-        (find-file new-post-file)))))
+  (insert "--------------------------------------------------------------------------------"))
 
-;; https://stackoverflow.com/a/7015844
-(defun org-archive-done-tasks ()
+(defun org-insert-datetime-bullet ()
   (interactive)
-  (org-map-entries 'org-archive-subtree "/DONE" 'file))
+  (insert
+   (format-time-string "- [%Y-%m-%d %a %H:%M] ")))
+
+(defun ruby-insert-remote-byebug ()
+  (interactive)
+  (indent-for-tab-command)
+  (insert "remote_byebug"))
+
+;; https://github.com/magit/magit/issues/3772
+(defun my-inhibit-global-linum-mode ()
+  "Counter-act `global-linum-mode'."
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (linum-mode 0))
+            :append :local))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -436,98 +429,75 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-  (spacemacs/toggle-transparency)
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces)
   (dolist (m '(clojure-mode clojurec-mode clojurescript-mode clojurex-mode))
     (spacemacs/set-leader-keys-for-major-mode m "fr" 'cider-format-region)
     (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer)
     (spacemacs/set-leader-keys-for-major-mode m "dl" 'cider-pprint-eval-last-sexp))
+  (dolist (m '(text-mode org-mode))
+    (spacemacs/set-leader-keys-for-major-mode m "iL" 'insert-divider-line))
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "ic" 'org-insert-src-block)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "iq" 'org-insert-quote-block)
-  (spacemacs/set-leader-keys "/" 'helm-ag-project-root)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "," 'org-insert-datetime-bullet)
+  (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "db" 'ruby-insert-remote-byebug)
+  (spacemacs/set-leader-keys "/" 'spacemacs/helm-project-do-ag)
+  ;; (spacemacs/set-leader-keys "/" 'counsel-rg)
   (spacemacs/set-leader-keys "xwC" 'flyspell-auto-correct-word)
-  (spacemacs/set-leader-keys "ghp" 'magit-gh-pulls-popup)
   (spacemacs/set-leader-keys "qc" 'delete-frame)
-  (spacemacs/set-leader-keys "aoT" 'open-tasks-file)
-  (spacemacs/set-leader-keys "aoJ" 'open-journal-file)
-  (spacemacs/set-leader-keys "aoW" 'open-work-file)
-  (spacemacs/set-leader-keys "abp" 'new-blog-post)
+  (spacemacs/set-leader-keys "aoT" 'open-notes-file)
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
   (spacemacs/set-leader-keys "ic" 'header-comment)
-  (add-hook 'php-mode-hook 'my-php-mode-hook)
-  (add-hook 'c++-mode-hook 'clang-format-bindings)
-  (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook react-mode-hook js2-mode-hook)))
+  (add-hook 'magit-mode-hook 'my-inhibit-global-linum-mode)
+  (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook ruby-mode-hook react-mode-hook js2-mode-hook)))
     (spacemacs/add-to-hooks 'fci-mode fci-mode-hooks))
-  (defun clang-format-bindings ()
-    (define-key c++-mode-map [tab] 'clang-format-buffer))
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
-  (spaceline-compile)
   (defalias 'forward-evil-word 'forward-evil-symbol)
+  (spaceline-compile)
+  (sp-local-pair '(react-mode ruby-mode) "<" ">" :actions nil)
+  (advice-add 'org-archive-subtree :after #'save-notes-archive-file)
   (setq css-indent-offset 2
-        js-indent-level 2
-        js2-basic-offset 2
-        ns-use-srgb-colorspace nil
+        helm-ag-base-command "rg --vimgrep --no-heading --smart-case"
+        helm-buffer-max-length 80
         ispell-program-name "/usr/local/bin/aspell"
-        org-agenda-files (list tasks-file)
+        js2-basic-offset 2
+        js-indent-level 2
+        js2-strict-missing-semi-warning nil
+        magit-git-global-arguments '("--no-literal-pathspecs")
+        magit-process-yes-or-no-prompt-regexp " [\[(]\\([Yy]\\(?:es\\)?\\)[/|]?\\([Nn]o?\\)[\])] ?[?:]? ?$"
+
+        ;; https://magit.vc/manual/magit/Performance.html
+        magit-refresh-status-buffer nil
+        vc-handled-backends (delq 'Git vc-handled-backends)
+
+        neo-window-width 40
+        ns-use-srgb-colorspace nil
+        nrepl-use-ssh-fallback-for-remote-hosts t
+        org-agenda-files (list notes-file)
         org-pretty-entities t
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
-        org-capture-templates '(("t" "Todo" entry (file+headline tasks-file "Personal")
+        org-capture-templates '(("t" "Task" entry (file+headline notes-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
-                                ("s" "School" entry (file+headline tasks-file "School")
-                                 "* TODO %?\nEntered on %U\n  %i\n  %a")
-                                ("j" "Journal" entry (file+olp+datetree journal-file)
-                                 "* %?\nEntered on %U\n  %i\n  %a")
-                                ("w" "Work" entry (file+olp+datetree work-file "Notes")
-                                 "* %?\nEntered on %U\n  %i\n  %a")
-                                ("W" "Work tasks" entry (file+headline work-file "Tasks")
-                                 "* TODO %?\nEntered on %U\n  %i\n  %a"))
+                                ("n" "Note" entry (file+olp+datetree notes-file "Notes")
+                                 "* %?\nEntered on %U\n  %i\n  %a"))
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
         powerline-default-separator (if (display-graphic-p) 'arrow 'utf-8)
+        projectile-enable-caching t
         tramp-terminal-type "dumb"
         tramp-default-method "sshx"
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
-        js-indent-level 2
-        js2-basic-offset 2
-        js2-strict-missing-semi-warning nil
-        css-indent-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-attr-indent-offset 2
-        nrepl-use-ssh-fallback-for-remote-hosts t
         yas-snippet-dirs '("~/.spacemacs.d/snippets")
-        projectile-enable-caching t)
-  (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-                 (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-                 (36 . ".\\(?:>\\)")
-                 (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-                 (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-                 (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-                 (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-                 (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-                 (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-                 (48 . ".\\(?:x[a-zA-Z]\\)")
-                 (58 . ".\\(?:::\\|[:=]\\)")
-                 (59 . ".\\(?:;;\\|;\\)")
-                 (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-                 (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-                 (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-                 (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-                 (91 . ".\\(?:]\\)")
-                 (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-                 (94 . ".\\(?:=\\)")
-                 (119 . ".\\(?:ww\\)")
-                 (123 . ".\\(?:-\\)")
-                 (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-                 (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)"))))
-    (dolist (char-regexp alist)
-      (set-char-table-range composition-function-table (car char-regexp)
-                            `([,(cdr char-regexp) 0 font-shape-gstring])))))
+        )
+  )
+
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
