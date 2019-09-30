@@ -348,10 +348,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 (defun save-notes-archive-file ()
   (interactive)
   (save-some-buffers 'no-confirm (lambda ()
-                                   (cond
-                                    ((and buffer-file-name
-                                          (equal buffer-file-name
-                                                 (expand-file-name notes-archive-file))))))))
+                                   (and buffer-file-name
+                                        (equal buffer-file-name
+                                               (expand-file-name notes-archive-file))))))
 
 (defun open-notes-file ()
   (interactive)
