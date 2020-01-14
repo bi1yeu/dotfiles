@@ -455,6 +455,10 @@ you should place your code here."
   (spaceline-compile)
   (sp-local-pair '(react-mode ruby-mode) "<" ">" :actions nil)
   (advice-add 'org-archive-subtree :after #'save-notes-archive-file)
+
+  ;; this allows to paste over visually-selected region
+  (delete-selection-mode 1)
+
   (setq css-indent-offset 2
         helm-ag-base-command "rg --vimgrep --no-heading --smart-case"
         helm-buffer-max-length 80
