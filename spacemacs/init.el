@@ -455,10 +455,8 @@ you should place your code here."
   (spaceline-compile)
   (sp-local-pair '(react-mode ruby-mode) "<" ">" :actions nil)
   (advice-add 'org-archive-subtree :after #'save-notes-archive-file)
-
   ;; this allows to paste over visually-selected region
   (delete-selection-mode 1)
-
   (setq css-indent-offset 2
         helm-ag-base-command "rg --vimgrep --no-heading --smart-case"
         helm-buffer-max-length 80
@@ -468,11 +466,6 @@ you should place your code here."
         js2-strict-missing-semi-warning nil
         magit-git-global-arguments '("--no-literal-pathspecs")
         magit-process-yes-or-no-prompt-regexp " [\[(]\\([Yy]\\(?:es\\)?\\)[/|]?\\([Nn]o?\\)[\])] ?[?:]? ?$"
-
-        ;; https://magit.vc/manual/magit/Performance.html
-        magit-refresh-status-buffer nil
-        vc-handled-backends (delq 'Git vc-handled-backends)
-
         neo-window-width 40
         ns-use-srgb-colorspace nil
         nrepl-use-ssh-fallback-for-remote-hosts t
