@@ -431,6 +431,9 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (evil-goggles-mode)
   (evil-goggles-use-diff-faces)
+  (use-package jest
+    :config
+    (setq jest-executable "yarn jest"))
   (dolist (m '(clojure-mode clojurec-mode clojurescript-mode clojurex-mode))
     (spacemacs/set-leader-keys-for-major-mode m "fr" 'cider-format-region)
     (spacemacs/set-leader-keys-for-major-mode m "sk" 'custom-clear-repl-buffer)
@@ -454,6 +457,7 @@ you should place your code here."
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
     (spacemacs/add-to-hooks 'visual-line-mode text-mode-hooks)
     (spacemacs/add-to-hooks 'flyspell-mode text-mode-hooks))
+  (spacemacs/set-leader-keys-for-major-mode 'react-mode "tb" 'jest-file)
   (defalias 'forward-evil-word 'forward-evil-symbol)
   (spaceline-compile)
   (sp-local-pair '(react-mode ruby-mode) "<" ">" :actions nil)
