@@ -143,16 +143,17 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         majapahit-light
+                         sanityinc-solarized-dark
+                         birds-of-paradise-plus
+                         solarized-dark
+                         organic-green
                          darktooth
                          sanityinc-tomorrow-blue
-                         solarized-light
-                         birds-of-paradise-plus
                          zen-and-art
-                         majapahit-light
                          whiteboard
                          zenburn
                          sanityinc-tomorrow-eighties
-                         sanityinc-solarized-light
                          majapahit-dark
                          dracula
                          )
