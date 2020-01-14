@@ -54,7 +54,7 @@ values."
      python
      ranger
      react
-     ruby
+     (ruby :variables ruby-test-runner 'rspec)
      ruby-on-rails
      search-engine
      (shell :variables shell-default-shell 'shell)
