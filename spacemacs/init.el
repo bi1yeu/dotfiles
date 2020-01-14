@@ -415,13 +415,6 @@ again."
   (indent-for-tab-command)
   (insert "remote_byebug"))
 
-;; https://github.com/magit/magit/issues/3772
-(defun my-inhibit-global-linum-mode ()
-  "Counter-act `global-linum-mode'."
-  (add-hook 'after-change-major-mode-hook
-            (lambda () (linum-mode 0))
-            :append :local))
-
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -451,7 +444,6 @@ you should place your code here."
   (spacemacs/set-leader-keys "aoT" 'open-notes-file)
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
   (spacemacs/set-leader-keys "ic" 'header-comment)
-  (add-hook 'magit-mode-hook 'my-inhibit-global-linum-mode)
   (spacemacs/set-leader-keys "gb" 'magit-blame)
   (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook ruby-mode-hook react-mode-hook js2-mode-hook)))
     (spacemacs/add-to-hooks 'fci-mode fci-mode-hooks))
