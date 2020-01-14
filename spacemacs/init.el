@@ -452,6 +452,7 @@ you should place your code here."
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
   (spacemacs/set-leader-keys "ic" 'header-comment)
   (add-hook 'magit-mode-hook 'my-inhibit-global-linum-mode)
+  (spacemacs/set-leader-keys "gb" 'magit-blame)
   (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook ruby-mode-hook react-mode-hook js2-mode-hook)))
     (spacemacs/add-to-hooks 'fci-mode fci-mode-hooks))
   (let ((text-mode-hooks '(text-mode-hook org-mode-hook markdown-mode-hook)))
