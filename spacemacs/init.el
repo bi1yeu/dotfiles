@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
      lsp
      markdown
      multiple-cursors
-     org
+     (org :variables org-want-todo-bindings t)
      osx
      python
      ranger
