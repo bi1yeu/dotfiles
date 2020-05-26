@@ -539,10 +539,10 @@ dump."
   (insert
    (format-time-string "- [%Y-%m-%d %a %H:%M] ")))
 
-(defun ruby-insert-remote-byebug ()
+(defun ruby-insert-byebug ()
   (interactive)
   (indent-for-tab-command)
-  (insert "remote_byebug"))
+  (insert "devbox_byebug"))
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -571,7 +571,7 @@ before packages are loaded."
 
   (advice-add 'org-archive-subtree :after #'save-notes-archive-file)
 
-  (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "db" 'ruby-insert-remote-byebug)
+  (spacemacs/set-leader-keys-for-major-mode 'ruby-mode "db" 'ruby-insert-byebug)
 
   (spacemacs/set-leader-keys "/" 'spacemacs/helm-project-do-ag)
 
@@ -617,6 +617,7 @@ before packages are loaded."
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "WAITING" "|" "DONE" "ABANDONED" "DELEGATED"))
         powerline-default-separator (if (display-graphic-p) 'arrow 'utf-8)
         projectile-enable-caching t
+        ruby-insert-encoding-magic-comment nil
         tramp-terminal-type "dumb"
         tramp-default-method "sshx"
         tramp-inline-compress-start-size 1000000 ;; hack via http://emacs.stackexchange.com/questions/29286/tramp-unable-to-open-some-files
