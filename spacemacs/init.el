@@ -48,7 +48,9 @@ This function should only modify configuration layer settings."
      github
      helm
      html
-     javascript
+     (javascript :variables
+                 node-add-modules-path t
+                 javascript-backend 'lsp)
      lsp
      markdown
      multiple-cursors
