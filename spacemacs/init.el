@@ -594,7 +594,6 @@ before packages are loaded."
 
   (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case"
         helm-buffer-max-length 80
-        helm-follow-mode-persistent t
         ispell-program-name "/usr/local/bin/aspell"
         css-indent-offset 2
         js2-basic-offset 2
