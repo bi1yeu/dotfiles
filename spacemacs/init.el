@@ -32,7 +32,9 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(rust
+     graphviz
+     speed-reading
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -54,12 +56,15 @@ This function should only modify configuration layer settings."
      lsp
      markdown
      multiple-cursors
-     (org :variables org-want-todo-bindings t)
+     (org :variables
+          org-want-todo-bindings t
+          org-enable-org-journal-support t
+          org-journal-dir "~/Documents/journal/")
      osx
      python
      ranger
      react
-     ruby
+     (ruby :variables ruby-test-runner 'rspec)
      ruby-on-rails
      (shell :variables shell-default-shell 'shell)
      shell-scripts
@@ -514,13 +519,15 @@ dump."
           '("" "emacs-lisp" "python" "C" "sh" "java" "js" "json" "clojure" "coffee"
             "C++" "css" "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond"
             "mscgen" "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk"
-            "ditaa" "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
+            "ditaa" "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "rails" "ruby"
             "scheme" "sqlite")))
      (list (ido-completing-read "Source code type: " src-code-types))))
   (progn
     (newline-and-indent)
     (insert (if (not (string-equal src-code-type ""))
-                (format "#+BEGIN_SRC %s\n" src-code-type)
+                (if (string-equal src-code-type "rails")
+                    "#+BEGIN_SRC ruby :session rails :exports both\n"
+                    (format "#+BEGIN_SRC %s\n" src-code-type))
               "#+BEGIN_SRC"))
     (newline-and-indent)
     (insert "#+END_SRC\n")
@@ -585,8 +592,8 @@ before packages are loaded."
 
   (spacemacs/set-leader-keys "bS" 'save-some-buffers)
 
-  (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook ruby-mode-hook react-mode-hook js2-mode-hook)))
-    (spacemacs/add-to-hooks 'fci-mode fci-mode-hooks))
+  ;; (let ((fci-mode-hooks '(python-mode-hook clojure-mode-hook ruby-mode-hook react-mode-hook js2-mode-hook)))
+  ;;   (spacemacs/add-to-hooks 'fci-mode fci-mode-hooks))
 
   (defalias 'forward-evil-word 'forward-evil-symbol)
 
@@ -611,6 +618,7 @@ before packages are loaded."
         nrepl-use-ssh-fallback-for-remote-hosts t
         org-agenda-files (list notes-file)
         org-pretty-entities t
+        org-confirm-babel-evaluate nil
         org-bullets-bullet-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Task" entry (file+headline notes-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
