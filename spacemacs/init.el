@@ -619,7 +619,7 @@ before packages are loaded."
         org-agenda-files (list notes-file)
         org-pretty-entities t
         org-confirm-babel-evaluate nil
-        org-bullets-bullet-list '("■" "◆" "▲" "▶")
+        org-superstar-headline-bullets-list '("■" "◆" "▲" "▶")
         org-capture-templates '(("t" "Task" entry (file+headline notes-file "Tasks")
                                  "* TODO %?\nEntered on %U\n  %i\n  %a")
                                 ("n" "Note" entry (file+olp+datetree notes-file "Notes")
